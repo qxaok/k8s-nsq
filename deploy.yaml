@@ -115,7 +115,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: nsqlookupd
-        image: nsqio/nsq:v1.1.0
+        image: nsqio/nsq:v1.2.0
         imagePullPolicy: Always
         resources:
           requests:
@@ -171,7 +171,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
       containers:
       - name: nsqd
-        image: nsqio/nsq:v1.1.0
+        image: nsqio/nsq:v1.2.0
         imagePullPolicy: Always
         resources:
           requests:
@@ -214,19 +214,19 @@ spec:
               fieldPath: metadata.name
       terminationGracePeriodSeconds: 5
       volumes:
-      - name: datadir
+      - name: data
         persistentVolumeClaim:
-          claimName: datadir
+          claimName: data
   volumeClaimTemplates:
   - metadata:
-      name: datadir
+      name: data
     spec:
       accessModes:
         - "ReadWriteOnce"
-      storageClassName: ssd
+      storageClassName: alicloud-disk-efficiency
       resources:
         requests:
-          storage: 1Gi
+          storage: 20Gi
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -242,7 +242,7 @@ spec:
     spec:
       containers:
       - name: nsqadmin
-        image: nsqio/nsq:v1.1.0
+        image: nsqio/nsq:v1.2.0
         imagePullPolicy: Always
         resources:
           requests:
