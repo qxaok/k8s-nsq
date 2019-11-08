@@ -193,7 +193,7 @@ spec:
             port: http
           initialDelaySeconds: 2
         volumeMounts:
-        - name: datadir
+        - name: data
           mountPath: /data
         command:
           - /nsqd
